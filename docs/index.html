@@ -1,0 +1,168 @@
+<!--
+  ~ Copyright (c) 2020. The Production Management Group, Ltd.
+  -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>The Engage Group's ARIA in CMS</title>
+	<meta charset="UTF-8" />
+	<meta name="keywords" content="javascript, library, engaging networks, donation, form" />
+	<meta name="description" content="Creates a global object representing the donation form and various configuration options. Optionally generates a fake page structure with (optional) breadcrumb and (optional) button navigation." />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<style>
+		body {
+			background: white;
+			margin: 0 auto;
+			max-width: 60rem;
+		}
+
+		td {
+			padding: 4pt;
+			vertical-align: top;
+		}
+
+		pre {
+			font-size: smaller;
+			max-width: 800px;
+			overflow: auto;
+		}
+
+		/*noinspection CssUnusedSymbol*/
+		td > pre.prettyprint.lang-javascript.prettyprinted {
+			max-width: 20rem;
+			padding: .5rem;
+		}
+
+		tr:nth-child(odd) {
+			background: lightgray;
+		}
+
+		tr:nth-child(2n+1) td[colspan] {
+			background: white;
+		}
+
+		dt {
+			margin-top: 10pt;
+		}
+
+		.warning {
+			background: yellow;
+			color: red;
+		}
+
+		.warning::before {
+			content: "WARNING: ";
+		}
+	</style>
+	<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+</head>
+<body>
+<h1>The Engage Group's ARIA in CMS</h1>
+<p>When you absolutely positively cannot just put semantic HTML in a content block, set aria attributes and generate HTML by scanning the class names.
+	<span class="warning">This package will blindly generate HTML and attributes and can completely break the web page.</span></p>
+<h2 id="provides">Provides</h2>
+<p>teg-aria-in-cms.js</p>
+<h2 id="implementation">Implementation</h2>
+<p>Link to the JavaScript file somewhere in the page.</p>
+<pre class="prettyprint lang-javascript">
+   &lt;script src="../path/teg-aria-in-cms.js">&lt;/script>
+</pre>
+<p>Use the CMS&rsquo;s custom class names feature to tag generated HTML with class names beginning with one of the prefixes in <a href="#prefixes">the list below</a>.</p>
+<h2 id="prefixes">Class Name Prefixes</h2>
+<dl>
+	<dt><code class="prettyprint lang-javascript">aic-id-*</code></dt>
+	<dd>
+		<p>Adds an <code class="prettyprint lang-javascript">ID</code> attribute with the value of <code class="prettyprint lang-javascript">*</code>. For example, the following:</p>
+		<code class="prettyprint lang-javascript">&lt;div class="aic-id-myID">&lt;/div></code>
+		<p>&hellip;will result in&hellip;</p>
+		<code class="prettyprint lang-javascript">&lt;div id="myID" class="aic-id-myID">&lt;/div></code>
+	</dd>
+	<dt><code class="prettyprint lang-javascript">aic-wrap-item-*</code></dt>
+	<dd>
+		<p>Generates a new HTML element <code class="prettyprint lang-javascript">*</code> and wraps it around the tagged CMS-generated HTML elements.</p>
+		<code class="prettyprint lang-javascript">&lt;div class="aic-wrap-item-section">&lt;/div></code>
+		<p>&hellip;will result in&hellip;</p>
+		<code class="prettyprint lang-javascript">&lt;section>&lt;div id="myID" class="aic-id-myID">&lt;/div>&lt;/section></code>
+	</dd>
+	<dt><code class="prettyprint lang-javascript">aic-wrap-label-*</code></dt>
+	<dd>
+		<p>Adds an <code class="prettyprint lang-javascript">aria-label</code> attribute to a newly generated HTML element specified by
+			<code class="prettyprint lang-javascript">aic-wrap-item-*</code>.
+		</p>
+		<code class="prettyprint lang-javascript">&lt;div class="aic-wrap-item-section aic-wrap-label-My-Label">&lt;/div></code>
+		<p>&hellip;will result in&hellip;</p>
+		<code class="prettyprint lang-javascript">&lt;section aria-label="My Label">&lt;div id="myID" class="aic-id-myID">&lt;/div>&lt;/section></code>
+		<p>Note that <code class="prettyprint lang-javascript">-</code> and
+			<code class="prettyprint lang-javascript">_</code> in the value are replaced with a space. Multiple elements with the same
+			<code class="prettyprint lang-javascript">aic-wrap-label-*</code> value will be appended to the same newly generated HTML element.
+		</p>
+		<code class="prettyprint lang-javascript">&lt;div class="aic-wrap-item-section aic-wrap-label-My-Label">&lt;/div><br />
+			&lt;div>no change here&lt;/div><br />
+			&lt;div class="aic-wrap-label-My-Label">&lt;/div></code>
+		<p>&hellip;will result in&hellip;</p>
+		<code class="prettyprint lang-javascript">&lt;section aria-label="My Label"><br />
+			&nbsp;&nbsp;&nbsp;&lt;div id="myID" class="aic-id-myID">&lt;/div><br />
+			&nbsp;&nbsp;&nbsp;&lt;div class="aic-wrap-label-My-Label">&lt;/div><br />
+			&lt;/section><br />
+			&lt;div>no change here&lt;/div></code>
+		<p>Note that the HTML elements moved to the newly generated HTML need not be contiguous. <span class="warning">Use with caution.</span></p>
+	</dd>
+	<dt><code class="prettyprint lang-javascript">aic-wrap-labelledby-*</code></dt>
+	<dd>
+		<p>Adds an <code class="prettyprint lang-javascript">aria-labelledby</code> attribute to a newly generated HTML element specified by
+			<code class="prettyprint lang-javascript">aic-wrap-item-*</code>.
+		</p>
+		<code class="prettyprint lang-javascript">&lt;div class="aic-wrap-item-section aic-wrap-labelledby-labelID"><br />
+			&nbsp;&nbsp;&nbsp;&lt;h2 id="labelID">H2 Element For Section Label&lt;/h2><br />
+			&lt;/div></code>
+		<p>&hellip;will result in&hellip;</p>
+		<code class="prettyprint lang-javascript">&lt;section aria-labelledby="labelID"><br />
+			&nbsp;&nbsp;&nbsp;&lt;div class="aic-wrap-item-section aic-wrap-labelledby-labelID"><br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;h2 id="labelID">H2 Element For Section Label&lt;/h2><br />
+			&nbsp;&nbsp;&nbsp;&lt;/div><br />
+			&lt;/section></code>
+		<p>Just like <code class="prettyprint lang-javascript">aic-wrap-label-*</code> above, multiple elements with the same
+			<code class="prettyprint lang-javascript">aic-wrap-labelledby-*</code> values will be appended to the newly generated HTML. If both
+			<code class="prettyprint lang-javascript">aic-wrap-label-*</code> and <code class="prettyprint lang-javascript">aic-wrap-labelledby-*</code> are present,
+			<code class="prettyprint lang-javascript">aic-wrap-labelledby-*</code> will be ignored.
+		</p>
+	</dd>
+	<dt><code class="prettyprint lang-javascript">aic-role-item-*</code></dt>
+	<dd>
+		<p>Adds an <code class="prettyprint lang-javascript">role</code> attribute with the value of <code class="prettyprint lang-javascript">*</code>. For example, the following:
+		</p>
+		<code class="prettyprint lang-javascript">&lt;div class="aic-role-item-form">&lt;/div></code>
+		<p>&hellip;will result in&hellip;</p>
+		<code class="prettyprint lang-javascript">&lt;div role="form" class="aic-role-item-form">&lt;/div></code>
+	</dd>
+	<dt><code class="prettyprint lang-javascript">aic-role-label-*</code></dt>
+	<dd>
+		<p>Adds an <code class="prettyprint lang-javascript">aria-label</code> attribute to a newly generated HTML element specified by
+			<code class="prettyprint lang-javascript">aic-role-item-*</code>.
+		</p>
+		<code class="prettyprint lang-javascript">&lt;div class="aic-role-item-complementary aic-role-label-My-Label">&lt;/div></code>
+		<p>&hellip;will result in&hellip;</p>
+		<code class="prettyprint lang-javascript">&lt;div role="complementary" aria-label="My Label" class="aic-id-myID">&lt;/div></code>
+		<p>Note that <code class="prettyprint lang-javascript">-</code> and <code class="prettyprint lang-javascript">_</code> in the value are replaced with a space.
+		</p>
+	</dd>
+	<dt><code class="prettyprint lang-javascript">aic-role-labelledby-*</code></dt>
+	<dd>
+		<p>Adds an <code class="prettyprint lang-javascript">aria-labelledby</code> attribute to a newly generated HTML element specified by
+			<code class="prettyprint lang-javascript">aic-role-item-*</code>.
+		</p>
+		<code class="prettyprint lang-javascript">&lt;div class="aic-role-item-group aic-role-labelledby-labelID"><br />
+			&nbsp;&nbsp;&nbsp;&lt;h2 id="labelID">H2 Element For Section Label&lt;/h2><br />
+			&lt;/div></code>
+		<p>&hellip;will result in&hellip;</p>
+		<code class="prettyprint lang-javascript">&lt;div role="group" aria-labelledby="labelID" class="aic-wrap-item-section aic-wrap-labelledby-labelID"><br />
+			&nbsp;&nbsp;&nbsp;&lt;h2 id="labelID">H2 Element For Section Label&lt;/h2><br />
+			&lt;/div><br />
+			&lt;/section></code>
+		<p>If both <code class="prettyprint lang-javascript">aic-role-label-*</code> and <code class="prettyprint lang-javascript">aic-role-labelledby-*</code> are present,
+			<code class="prettyprint lang-javascript">aic-role-labelledby-*</code> will be ignored.
+		</p>
+	</dd>
+</dl>
+</body>
+</html>

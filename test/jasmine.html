@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>TEG ARIA in CMS Jasmine Test</title>
+	<script src="../src/teg-aria-in-cms.js" type="text/javascript"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jasmine/3.6.0/jasmine.css" />
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jasmine/3.6.0/jasmine.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jasmine/3.6.0/jasmine-html.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jasmine/3.6.0/boot.js"></script>
+	<script type="text/javascript" src="jasmine.specs.js"></script>
+</head>
+<body>
+<h1>TEG ARIA in CMS Manual Test</h1>
+<div class="aic-role-item-form aic-role-label-This-Form aic-wrap-item-section aic-wrap-labelledby-sectionLabel aic-id-myIDValue">
+	<h2 id="sectionLabel">ARIA Tagged Block</h2>
+	<p class="aic-id-foo">This should have ARIA attributes.</p>
+	<p id="bar">Paragraph id="bar"</p>
+	<p class="aic-id-bar">Try to set id="bar", should fail</p>
+</div>
+<div class="aic-wrap-labelledby-sectionLabel">
+	<p>also in new section element</p>
+</div>
+<div>
+	<p>not in new section element</p>
+</div>
+<div class="aic-wrap-item-section aic-wrap-label-My_Label aic-wrap-labelledby-ignoreMe">
+	<p>new section labelled &ldquo;My Label&rdquo;</p>
+</div>
+<div class="aic-wrap-labelledby-sectionLabel">
+	<p>dis-contiguous element in new section element</p>
+</div>
+<div class="aic-wrap-label-My_Label">
+	<p>another bit in the &ldquo;My Label&rdquo; section</p>
+</div>
+</body>
+</html>
