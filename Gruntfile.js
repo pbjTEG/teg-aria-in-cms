@@ -43,23 +43,12 @@ module.exports = function (grunt) {
 					                 },
 				                 ]
 			                 }
-		                 },
-		                 file_append: {
-			                 default_options: {
-				                 files: [
-					                 {
-						                 prepend: '<%= banner %>',
-						                 input  : 'dist/<%= pkg.name %><%= postFix %>.min.css',
-						                 output : 'dist/<%= pkg.name %><%= postFix %>.min.css',
-					                 }
-				                 ]
-			                 }
 		                 }
 	                 });
 
 	require('load-grunt-tasks')(grunt);
 
 	// Default task(s).
-	grunt.registerTask('default', ['uglify', 'copy', 'file_append']);
+	grunt.registerTask('default', ['uglify', 'copy']);
 
 };
