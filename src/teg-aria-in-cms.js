@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 		} else {
 
-			if (wrappedItems[wrappedItemsKey].wrapLabelledBy !== '') {
+			if (typeof wrappedItems[wrappedItemsKey].wrapLabelledBy !== 'undefined') {
 				newNode.setAttribute('aria-labelledBy', wrappedItems[wrappedItemsKey].wrapLabelledBy);
 			}
 		}
@@ -89,12 +89,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
 		        thisNode.setAttribute('role', roleAttributes['aic-role-item-']);
 
-		        if (roleAttributes['aic-role-label-'] !== '') {
+		        if (typeof roleAttributes['aic-role-label-'] !== 'undefined') {
 			        thisNode.setAttribute('aria-label', roleAttributes['aic-role-label-'].replace(/[-_]/g, ' '));
 
 		        } else {
 
-			        if (roleAttributes['aic-role-labelledby-'] !== '') {
+			        if (typeof roleAttributes['aic-role-labelledby-'] !== 'undefined') {
 				        thisNode.setAttribute('aria-labelledby', roleAttributes['aic-role-labelledby-']);
 			        }
 		        }
