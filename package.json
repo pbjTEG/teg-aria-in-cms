@@ -4,6 +4,7 @@
    "version": "0.1",
    "author": "PMG: The Engage Group, Paul B. Joiner <paulj@engageyourcause.com>",
    "description": "Generate ARIA attributes for CMS-generated HTML.",
+   "license": "MIT",
    "devDependencies": {
       "git-rev-sync": "^3.0.2",
       "grunt": "^1.5.3",
