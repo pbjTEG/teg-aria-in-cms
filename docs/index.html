@@ -54,6 +54,7 @@
 			content: "WARNING: ";
 		}
 	</style>
+	<!--suppress JSUnresolvedLibraryURL -->
 	<script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
 </head>
 <body>
@@ -82,7 +83,7 @@
 		<p>Generates a new HTML element <code class="prettyprint lang-javascript">*</code> and wraps it around the tagged CMS-generated HTML elements.</p>
 		<code class="prettyprint lang-javascript">&lt;div class="aic-wrap-item-section">&lt;/div></code>
 		<p>&hellip;will result in&hellip;</p>
-		<code class="prettyprint lang-javascript">&lt;section>&lt;div id="myID" class="aic-id-myID">&lt;/div>&lt;/section></code>
+		<code class="prettyprint lang-javascript">&lt;section>&lt;div class="aic-wrap-item-section">&lt;/div>&lt;/section></code>
 	</dd>
 	<dt><code class="prettyprint lang-javascript">aic-wrap-label-*</code></dt>
 	<dd>
@@ -91,7 +92,7 @@
 		</p>
 		<code class="prettyprint lang-javascript">&lt;div class="aic-wrap-item-section aic-wrap-label-My-Label">&lt;/div></code>
 		<p>&hellip;will result in&hellip;</p>
-		<code class="prettyprint lang-javascript">&lt;section aria-label="My Label">&lt;div id="myID" class="aic-id-myID">&lt;/div>&lt;/section></code>
+		<code class="prettyprint lang-javascript">&lt;section aria-label="My Label">&lt;div class="aic-wrap-item-section aic-wrap-label-My-Label">&lt;/div>&lt;/section></code>
 		<p>Note that <code class="prettyprint lang-javascript">-</code> and
 			<code class="prettyprint lang-javascript">_</code> in the value are replaced with a space. Multiple elements with the same
 			<code class="prettyprint lang-javascript">aic-wrap-label-*</code> value will be appended to the same newly generated HTML element.
@@ -101,7 +102,7 @@
 			&lt;div class="aic-wrap-label-My-Label">&lt;/div></code>
 		<p>&hellip;will result in&hellip;</p>
 		<code class="prettyprint lang-javascript">&lt;section aria-label="My Label"><br />
-			&nbsp;&nbsp;&nbsp;&lt;div id="myID" class="aic-id-myID">&lt;/div><br />
+			&nbsp;&nbsp;&nbsp;&lt;div class="aic-wrap-item-section aic-wrap-label-My-Label">&lt;/div><br />
 			&nbsp;&nbsp;&nbsp;&lt;div class="aic-wrap-label-My-Label">&lt;/div><br />
 			&lt;/section><br />
 			&lt;div>no change here&lt;/div></code>
@@ -142,7 +143,7 @@
 		</p>
 		<code class="prettyprint lang-javascript">&lt;div class="aic-role-item-complementary aic-role-label-My-Label">&lt;/div></code>
 		<p>&hellip;will result in&hellip;</p>
-		<code class="prettyprint lang-javascript">&lt;div role="complementary" aria-label="My Label" class="aic-id-myID">&lt;/div></code>
+		<code class="prettyprint lang-javascript">&lt;div role="complementary" aria-label="My Label" class="aic-role-item-complementary aic-role-label-My-Label">&lt;/div></code>
 		<p>Note that <code class="prettyprint lang-javascript">-</code> and <code class="prettyprint lang-javascript">_</code> in the value are replaced with a space.
 		</p>
 	</dd>
@@ -155,7 +156,7 @@
 			&nbsp;&nbsp;&nbsp;&lt;h2 id="labelID">H2 Element For Section Label&lt;/h2><br />
 			&lt;/div></code>
 		<p>&hellip;will result in&hellip;</p>
-		<code class="prettyprint lang-javascript">&lt;div role="group" aria-labelledby="labelID" class="aic-wrap-item-section aic-wrap-labelledby-labelID"><br />
+		<code class="prettyprint lang-javascript">&lt;div role="group" aria-labelledby="labelID" class="aic-role-item-group aic-role-labelledby-labelID"><br />
 			&nbsp;&nbsp;&nbsp;&lt;h2 id="labelID">H2 Element For Section Label&lt;/h2><br />
 			&lt;/div><br />
 			&lt;/section></code>
